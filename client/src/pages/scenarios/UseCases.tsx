@@ -55,7 +55,9 @@ export default function UseCases() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      {/* 🛑 替換最外層背景與文字預設色 */}
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+        
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-16">
           <div className="container">
@@ -75,13 +77,14 @@ export default function UseCases() {
               {scenarios.map((scenario, idx) => (
                 <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
                   <HoverScale>
-                    <Card className="border-border h-full hover:shadow-xl transition-shadow overflow-hidden">
-                      <CardHeader className="bg-slate-50/50 border-b border-border pb-6">
+                    {/* 🛑 卡片背景使用 bg-card */}
+                    <Card className="border-border bg-card h-full hover:shadow-xl transition-shadow overflow-hidden">
+                      <CardHeader className="bg-muted/50 border-b border-border pb-6">
                         <div className="flex items-center gap-4">
-                          <div className="p-3 bg-white rounded-xl shadow-sm">
+                          <div className="p-3 bg-background rounded-xl shadow-sm">
                             {scenario.icon}
                           </div>
-                          <CardTitle className="text-xl">{scenario.title}</CardTitle>
+                          <CardTitle className="text-xl text-card-foreground">{scenario.title}</CardTitle>
                         </div>
                       </CardHeader>
                       <CardContent className="pt-6">
@@ -91,8 +94,8 @@ export default function UseCases() {
                         <div className="space-y-3">
                           <p className="text-xs font-bold uppercase tracking-wider text-primary">建議操作步驟：</p>
                           {scenario.tasks.map((task, taskIdx) => (
-                            <div key={taskIdx} className="flex items-start gap-3 text-sm text-slate-600">
-                              <CheckCircle2 className="w-4 h-4 text-primary mt-0.5" />
+                            <div key={taskIdx} className="flex items-start gap-3 text-sm text-muted-foreground">
+                              <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                               <span>{task}</span>
                             </div>
                           ))}
@@ -106,7 +109,7 @@ export default function UseCases() {
 
             {/* Tips Section */}
             <MotionContainer direction="up">
-              <section className="mb-20 bg-primary/5 border-l-4 border-primary p-8 rounded-r-xl">
+              <section className="mb-20 bg-primary/10 border-l-4 border-primary p-8 rounded-r-xl">
                 <div className="flex gap-4">
                   <Lightbulb className="w-8 h-8 text-primary flex-shrink-0" />
                   <div>
@@ -121,7 +124,7 @@ export default function UseCases() {
                         '利用評論保留決策脈絡'
                       ].map((tip, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <div className="w-1 h-1 bg-primary rounded-full"></div>
+                          <div className="w-1 h-1 bg-primary rounded-full shrink-0"></div>
                           {tip}
                         </div>
                       ))}
@@ -133,23 +136,25 @@ export default function UseCases() {
 
             {/* Next Steps */}
             <MotionContainer direction="up">
-              <section className="bg-slate-900 text-white p-12 rounded-3xl text-center">
-                <Users className="w-12 h-12 text-primary mx-auto mb-6" />
+              {/* 🛑 替換黑漆漆的 bg-slate-900，改用企業主色調 bg-primary 與對應的文字色 */}
+              <section className="bg-primary text-primary-foreground p-12 rounded-3xl text-center">
+                <Users className="w-12 h-12 text-primary-foreground mx-auto mb-6" />
                 <h3 className="text-2xl font-bold mb-4">準備好提升團隊效率了嗎？</h3>
-                <p className="text-slate-400 mb-8 max-w-xl mx-auto">
+                <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
                   現在您已經看到了 Planner 的實際應用，是時候開始建立您的第一個計畫了。
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link href="/tutorials/operation-guide">
                     <HoverScale>
-                      <Button size="lg" className="px-10">
+                      {/* 按鈕反白處理，讓它在深藍色背景上跳出來 */}
+                      <Button size="lg" className="px-10 bg-background text-primary hover:bg-muted">
                         前往操作指南
                       </Button>
                     </HoverScale>
                   </Link>
                   <Link href="/support/faq">
                     <HoverScale>
-                      <Button size="lg" variant="outline" className="px-10 border-white text-white hover:bg-white/10">
+                      <Button size="lg" variant="outline" className="px-10 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
                         查看常見問題
                       </Button>
                     </HoverScale>

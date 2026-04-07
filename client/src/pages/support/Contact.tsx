@@ -32,7 +32,9 @@ export default function Contact() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      {/* 🛑 替換最外層背景與文字預設色 */}
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+        
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-16">
           <div className="container">
@@ -48,6 +50,7 @@ export default function Contact() {
         {/* Main Content */}
         <div className="container py-20">
           <div className="max-w-4xl mx-auto">
+            
             {/* Contact Methods */}
             <section className="mb-20">
               <MotionContainer direction="up">
@@ -57,12 +60,13 @@ export default function Contact() {
                 {contactMethods.map((method, idx) => (
                   <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
                     <HoverScale>
-                      <Card className="border-border h-full hover:shadow-xl transition-shadow">
+                      {/* 🛑 卡片加上 bg-card */}
+                      <Card className="border-border bg-card h-full hover:shadow-xl transition-shadow">
                         <CardHeader>
                           <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                             {method.icon}
                           </div>
-                          <CardTitle className="text-xl">{method.title}</CardTitle>
+                          <CardTitle className="text-xl text-card-foreground">{method.title}</CardTitle>
                         </CardHeader>
                         <CardContent>
                           <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
@@ -70,13 +74,13 @@ export default function Contact() {
                           </p>
                           {method.link.startsWith('/') ? (
                             <Link href={method.link}>
-                              <Button variant="outline" size="sm" className="w-full">
+                              <Button variant="outline" size="sm" className="w-full border-border hover:bg-muted text-foreground">
                                 {method.action}
                               </Button>
                             </Link>
                           ) : (
                             <a href={method.link}>
-                              <Button variant="outline" size="sm" className="w-full">
+                              <Button variant="outline" size="sm" className="w-full border-border hover:bg-muted text-foreground">
                                 {method.action}
                               </Button>
                             </a>
@@ -96,9 +100,10 @@ export default function Contact() {
               </MotionContainer>
               <div className="grid md:grid-cols-2 gap-8">
                 <MotionContainer direction="left">
-                  <Card className="border-border h-full">
+                  {/* 🛑 卡片加上 bg-card */}
+                  <Card className="border-border bg-card h-full">
                     <CardHeader>
-                      <CardTitle className="text-lg flex items-center gap-2">
+                      <CardTitle className="text-lg flex items-center gap-2 text-card-foreground">
                         <Globe className="w-5 h-5 text-primary" /> Microsoft Planner 官方文件
                       </CardTitle>
                     </CardHeader>
@@ -118,9 +123,10 @@ export default function Contact() {
                   </Card>
                 </MotionContainer>
                 <MotionContainer direction="right">
-                  <Card className="border-border h-full">
+                  {/* 🛑 卡片加上 bg-card */}
+                  <Card className="border-border bg-card h-full">
                     <CardHeader>
-                      <CardTitle className="text-lg flex items-center gap-2">
+                      <CardTitle className="text-lg flex items-center gap-2 text-card-foreground">
                         <MessageSquare className="w-5 h-5 text-primary" /> Microsoft 365 支援中心
                       </CardTitle>
                     </CardHeader>
@@ -144,14 +150,16 @@ export default function Contact() {
 
             {/* CTA Section */}
             <MotionContainer direction="up">
-              <section className="bg-slate-900 text-white rounded-3xl p-12 text-center">
+              {/* 🛑 替換黑漆漆的 bg-slate-900，改用企業主色調 bg-primary 與 text-primary-foreground */}
+              <section className="bg-primary text-primary-foreground rounded-3xl p-12 text-center">
                 <h3 className="text-2xl font-bold mb-4">準備好開始學習了嗎？</h3>
-                <p className="text-slate-400 mb-8 max-w-xl mx-auto">
+                <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
                   回到首頁，開始您的 Microsoft Planner 學習之旅。
                 </p>
                 <Link href="/">
                   <HoverScale>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-10">
+                    {/* 按鈕反白處理 */}
+                    <Button size="lg" className="bg-background text-primary hover:bg-muted px-10">
                       回到首頁
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>

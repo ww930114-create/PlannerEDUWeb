@@ -65,7 +65,8 @@ export default function FAQ() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      {/* 🛑 替換最外層背景與文字預設色 */}
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-16">
           <div className="container">
@@ -98,12 +99,14 @@ export default function FAQ() {
                     
                     return (
                       <MotionContainer key={itemKey} direction="up" delay={idx * 0.05}>
-                        <div className={`border rounded-xl overflow-hidden transition-all ${isOpen ? 'border-primary/30 shadow-sm' : 'border-border'}`}>
+                        {/* 🛑 背景色改用 bg-card 確保卡片底色一致 */}
+                        <div className={`bg-card border rounded-xl overflow-hidden transition-all ${isOpen ? 'border-primary/30 shadow-sm' : 'border-border'}`}>
                           <button
                             onClick={() => toggleItem(itemKey)}
-                            className="w-full flex items-center justify-between p-5 hover:bg-slate-50 transition text-left"
+                            // 🛑 hover:bg-slate-50 改成 hover:bg-muted
+                            className="w-full flex items-center justify-between p-5 hover:bg-muted transition text-left"
                           >
-                            <p className="font-semibold text-foreground pr-4">{item.q}</p>
+                            <p className="font-semibold text-card-foreground pr-4">{item.q}</p>
                             <motion.div
                               animate={{ rotate: isOpen ? 180 : 0 }}
                               transition={{ duration: 0.2 }}
@@ -120,7 +123,8 @@ export default function FAQ() {
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                               >
-                                <div className="p-5 bg-slate-50/50 border-t border-border">
+                                {/* 🛑 bg-slate-50/50 改成 bg-muted/50 */}
+                                <div className="p-5 bg-muted/50 border-t border-border">
                                   <p className="text-muted-foreground leading-relaxed text-sm">
                                     {item.a}
                                   </p>
@@ -147,12 +151,12 @@ export default function FAQ() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link href="/tutorials/operation-guide">
                     <HoverScale>
-                      <Button className="px-8">前往操作指南</Button>
+                      <Button className="px-8 bg-primary text-primary-foreground hover:bg-primary/90">前往操作指南</Button>
                     </HoverScale>
                   </Link>
                   <Link href="/support/contact">
                     <HoverScale>
-                      <Button variant="outline" className="px-8">聯絡支援</Button>
+                      <Button variant="outline" className="px-8 border-border hover:bg-muted text-foreground">聯絡支援</Button>
                     </HoverScale>
                   </Link>
                 </div>

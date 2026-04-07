@@ -12,7 +12,9 @@ const M365_ECOSYSTEM_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/31051966344693
 export default function Home() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      {/* 這裡是最關鍵的修改：bg-white 換成 bg-background，並加上 text-foreground 確保預設文字顏色 */}
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+        
         {/* Hero Section */}
         <section
           className="relative min-h-[600px] flex items-center justify-center text-center py-20 overflow-hidden"
@@ -22,7 +24,8 @@ export default function Home() {
             backgroundPosition: 'center',
           }}
         >
-          <div className="absolute inset-0 bg-white/10"></div>
+          {/* 遮罩稍微調深一點點，讓深淺色模式下的文字都清楚 */}
+          <div className="absolute inset-0 bg-background/50 backdrop-blur-[2px]"></div>
           <div className="relative z-10 container max-w-3xl px-4">
             <MotionContainer direction="up" delay={0.1}>
               <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
@@ -38,7 +41,8 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/basics/what-is-planner">
                   <HoverScale>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white w-full sm:w-auto">
+                    {/* text-white 換成 text-primary-foreground */}
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
                       立即開始
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -46,7 +50,7 @@ export default function Home() {
                 </Link>
                 <Link href="/tutorials/operation-guide">
                   <HoverScale>
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto bg-background">
                       查看操作指南
                     </Button>
                   </HoverScale>
@@ -72,12 +76,13 @@ export default function Home() {
               ].map((feature, idx) => (
                 <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
                   <HoverScale>
-                    <Card className="border-border hover:shadow-lg transition h-full">
+                    {/* 卡片背景預設會跟隨 bg-card，邊框跟隨 border-border */}
+                    <Card className="border-border bg-card hover:shadow-lg transition h-full">
                       <CardHeader>
                         <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                           {feature.icon}
                         </div>
-                        <CardTitle>{feature.title}</CardTitle>
+                        <CardTitle className="text-card-foreground">{feature.title}</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <p className="text-muted-foreground">{feature.desc}</p>
@@ -106,7 +111,7 @@ export default function Home() {
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-4">
                       <div className="flex-shrink-0">
-                        <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white font-bold">
+                        <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-primary-foreground font-bold">
                           {item.step}
                         </div>
                       </div>
@@ -123,7 +128,7 @@ export default function Home() {
                 </div>
               </MotionContainer>
               <MotionContainer direction="right">
-                <img src={LEARNING_PATH_IMG} alt="Learning Path" className="w-full rounded-lg shadow-lg" />
+                <img src={LEARNING_PATH_IMG} alt="Learning Path" className="w-full rounded-lg shadow-lg opacity-90 dark:opacity-80 transition-opacity" />
               </MotionContainer>
             </div>
           </div>
@@ -134,7 +139,7 @@ export default function Home() {
           <div className="container">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <MotionContainer direction="left">
-                <img src={M365_ECOSYSTEM_IMG} alt="M365 Ecosystem" className="w-full rounded-lg shadow-lg" />
+                <img src={M365_ECOSYSTEM_IMG} alt="M365 Ecosystem" className="w-full rounded-lg shadow-lg opacity-90 dark:opacity-80 transition-opacity" />
               </MotionContainer>
               <MotionContainer direction="right">
                 <h2 className="text-3xl font-bold mb-6">
@@ -177,9 +182,9 @@ export default function Home() {
                 { q: '如何刪除計畫？', a: '進入計畫設定，點擊「刪除此計畫」。請注意無法復原。' }
               ].map((faq, idx) => (
                 <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
-                  <Card className="border-border">
+                  <Card className="border-border bg-card">
                     <CardHeader>
-                      <CardTitle className="text-base">{faq.q}</CardTitle>
+                      <CardTitle className="text-base text-card-foreground">{faq.q}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground">{faq.a}</p>
@@ -191,7 +196,7 @@ export default function Home() {
             <div className="text-center mt-8">
               <Link href="/support/faq">
                 <HoverScale>
-                  <Button variant="outline">
+                  <Button variant="outline" className="bg-background">
                     查看所有 FAQ
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
@@ -202,18 +207,18 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-primary text-white overflow-hidden">
+        <section className="py-20 bg-primary text-primary-foreground overflow-hidden">
           <div className="container text-center relative">
             <MotionContainer direction="up">
               <h2 className="text-3xl font-bold mb-6">
                 準備好開始了嗎？
               </h2>
-              <p className="text-lg mb-8 text-white/90">
+              <p className="text-lg mb-8 text-primary-foreground/90">
                 只需 15 分鐘，您就能掌握 Planner 的基礎概念。
               </p>
               <Link href="/basics/what-is-planner">
                 <HoverScale>
-                  <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                  <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                     立即開始
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>

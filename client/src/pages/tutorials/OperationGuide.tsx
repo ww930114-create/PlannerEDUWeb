@@ -9,7 +9,9 @@ import { MotionContainer, PageTransition, HoverScale } from '@/components/Motion
 export default function OperationGuide() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      {/* 🛑 致命錯誤修正：bg-white 換成 bg-background，並加上 text-foreground */}
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+        
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-12">
           <div className="container">
@@ -25,6 +27,7 @@ export default function OperationGuide() {
         {/* Main Content */}
         <div className="container py-12">
           <div className="max-w-4xl mx-auto">
+            
             {/* Comparison Intro */}
             <section className="mb-16">
               <MotionContainer direction="up">
@@ -36,11 +39,11 @@ export default function OperationGuide() {
 
               <Tabs defaultValue="web" className="w-full">
                 <MotionContainer direction="up" delay={0.1}>
-                  <TabsList className="grid w-full grid-cols-2 mb-8">
-                    <TabsTrigger value="web" className="flex items-center gap-2">
+                  <TabsList className="grid w-full grid-cols-2 mb-8 bg-muted text-muted-foreground">
+                    <TabsTrigger value="web" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground">
                       <Monitor className="w-4 h-4" /> 網頁版 (Web)
                     </TabsTrigger>
-                    <TabsTrigger value="teams" className="flex items-center gap-2">
+                    <TabsTrigger value="teams" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground">
                       <Users className="w-4 h-4" /> Teams 版 (Teams Integration)
                     </TabsTrigger>
                   </TabsList>
@@ -49,17 +52,18 @@ export default function OperationGuide() {
                 {/* Web Content */}
                 <TabsContent value="web" className="space-y-8">
                   <MotionContainer direction="up">
-                    <div className="bg-secondary/30 rounded-xl p-8 border border-border">
-                      <h3 className="text-xl font-bold mb-4">如何開始？</h3>
+                    <div className="bg-muted/50 rounded-xl p-8 border border-border">
+                      <h3 className="text-xl font-bold mb-4 text-foreground">如何開始？</h3>
                       <p className="text-muted-foreground mb-6">
                         直接訪問 <a href="https://tasks.office.com" className="text-primary hover:underline font-semibold" target="_blank" rel="noopener noreferrer">tasks.office.com</a>。這是最快速、最直接的使用方式。
                       </p>
                       
                       <div className="grid md:grid-cols-2 gap-6">
                         <HoverScale>
-                          <Card className="border-border h-full">
+                          {/* 🛑 加上 bg-card */}
+                          <Card className="border-border bg-card h-full">
                             <CardHeader>
-                              <CardTitle className="text-base flex items-center gap-2">
+                              <CardTitle className="text-base flex items-center gap-2 text-card-foreground">
                                 <Layout className="w-4 h-4 text-primary" /> 介面特色
                               </CardTitle>
                             </CardHeader>
@@ -73,9 +77,9 @@ export default function OperationGuide() {
                           </Card>
                         </HoverScale>
                         <HoverScale>
-                          <Card className="border-border h-full">
+                          <Card className="border-border bg-card h-full">
                             <CardHeader>
-                              <CardTitle className="text-base flex items-center gap-2">
+                              <CardTitle className="text-base flex items-center gap-2 text-card-foreground">
                                 <Lightbulb className="w-4 h-4 text-primary" /> 適用情境
                               </CardTitle>
                             </CardHeader>
@@ -97,16 +101,16 @@ export default function OperationGuide() {
                 <TabsContent value="teams" className="space-y-8">
                   <MotionContainer direction="up">
                     <div className="bg-primary/5 rounded-xl p-8 border border-primary/20">
-                      <h3 className="text-xl font-bold mb-4">如何開始？</h3>
+                      <h3 className="text-xl font-bold mb-4 text-foreground">如何開始？</h3>
                       <p className="text-muted-foreground mb-6">
                         在 Teams 左側導覽列搜尋「Planner」並釘選，或在特定頻道的上方點擊「+」新增 Planner 標籤。
                       </p>
                       
                       <div className="grid md:grid-cols-2 gap-6">
                         <HoverScale>
-                          <Card className="border-border h-full">
+                          <Card className="border-border bg-card h-full">
                             <CardHeader>
-                              <CardTitle className="text-base flex items-center gap-2">
+                              <CardTitle className="text-base flex items-center gap-2 text-card-foreground">
                                 <Users className="w-4 h-4 text-primary" /> 協作優勢
                               </CardTitle>
                             </CardHeader>
@@ -120,9 +124,9 @@ export default function OperationGuide() {
                           </Card>
                         </HoverScale>
                         <HoverScale>
-                          <Card className="border-border h-full">
+                          <Card className="border-border bg-card h-full">
                             <CardHeader>
-                              <CardTitle className="text-base flex items-center gap-2">
+                              <CardTitle className="text-base flex items-center gap-2 text-card-foreground">
                                 <Lightbulb className="w-4 h-4 text-primary" /> 適用情境
                               </CardTitle>
                             </CardHeader>
@@ -155,9 +159,10 @@ export default function OperationGuide() {
                 {/* Step 1: Create */}
                 <MotionContainer direction="up">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4">1. 建立計畫</h3>
-                    <div className="bg-white border border-border rounded-lg overflow-hidden">
-                      <div className="p-6 border-b border-border bg-secondary/10">
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">1. 建立計畫</h3>
+                    {/* 🛑 這裡的 bg-white 被抓到了，改成 bg-card */}
+                    <div className="bg-card border border-border rounded-lg overflow-hidden">
+                      <div className="p-6 border-b border-border bg-muted/50">
                         <p className="text-sm text-muted-foreground">
                           點擊「+ 新計畫」，輸入名稱並選擇隱私等級（私人或公開）。在 Teams 中，您可以直接將計畫與特定頻道關聯。
                         </p>
@@ -169,22 +174,23 @@ export default function OperationGuide() {
                 {/* Step 2: Structure */}
                 <MotionContainer direction="up">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4">2. 設定結構 (分組與標籤)</h3>
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">2. 設定結構 (分組與標籤)</h3>
                     <p className="text-muted-foreground mb-6">
                       利用「分組」來定義工作流程（如：待處理、進行中、已完成），利用「標籤」來進行分類（如：行銷、技術、急件）。
                     </p>
                     <div className="grid md:grid-cols-2 gap-6">
                       <HoverScale>
-                        <div className="p-6 border border-border rounded-lg h-full">
-                          <h4 className="font-bold mb-2">分組 (Buckets)</h4>
+                        {/* 🛑 加上 bg-card */}
+                        <div className="p-6 border border-border bg-card rounded-lg h-full">
+                          <h4 className="font-bold mb-2 text-card-foreground">分組 (Buckets)</h4>
                           <p className="text-sm text-muted-foreground">
                             點擊「+ 新增分組」即可建立新的欄位，方便您將任務分類。
                           </p>
                         </div>
                       </HoverScale>
                       <HoverScale>
-                        <div className="p-6 border border-border rounded-lg h-full">
-                          <h4 className="font-bold mb-2">標籤 (Labels)</h4>
+                        <div className="p-6 border border-border bg-card rounded-lg h-full">
+                          <h4 className="font-bold mb-2 text-card-foreground">標籤 (Labels)</h4>
                           <p className="text-sm text-muted-foreground">
                             提供 25 種顏色，讓您為任務貼上多重分類標籤。
                           </p>
@@ -197,12 +203,12 @@ export default function OperationGuide() {
                 {/* Step 3: Tasks */}
                 <MotionContainer direction="up">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4">3. 任務管理</h3>
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">3. 任務管理</h3>
                     <p className="text-muted-foreground mb-6">
                       點擊任何任務卡片，您可以設定到期日、指派人員、新增附件、撰寫檢查清單，並在下方進行評論。
                     </p>
-                    <div className="bg-primary/5 border-l-4 border-primary p-6 rounded">
-                      <p className="text-sm font-semibold mb-2">💡 專家建議</p>
+                    <div className="bg-primary/10 border-l-4 border-primary p-6 rounded">
+                      <p className="text-sm font-semibold mb-2 text-foreground">💡 專家建議</p>
                       <p className="text-sm text-muted-foreground">
                         善用「My Tasks（我的任務）」區塊，它可以跨計畫匯總所有分配給您的任務，讓您對自己的工作量一目了然。
                       </p>
@@ -214,14 +220,15 @@ export default function OperationGuide() {
 
             {/* Next Steps CTA */}
             <MotionContainer direction="up">
-              <section className="bg-secondary/30 p-8 rounded-lg text-center">
+              <section className="bg-muted/50 p-8 rounded-lg text-center border border-border">
                 <h3 className="text-xl font-bold text-foreground mb-4">掌握了基礎，來看看如何具體管理任務吧！</h3>
                 <p className="text-muted-foreground mb-6">
                   接下來，我們將深入探討任務管理的進階技巧與最佳實踐。
                 </p>
                 <Link href="/tutorials/task-management">
                   <HoverScale>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
+                    {/* 🛑 text-white 換成 text-primary-foreground */}
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                       前往「任務管理教學」
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>

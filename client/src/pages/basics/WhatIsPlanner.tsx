@@ -31,7 +31,9 @@ export default function WhatIsPlanner() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      {/* 🛑 致命錯誤修正：bg-white 換成 bg-background，並加上 text-foreground */}
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+        
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-16">
           <div className="container">
@@ -43,7 +45,7 @@ export default function WhatIsPlanner() {
               <div className="mt-8">
                 <Link href="/tutorials/operation-guide">
                   <HoverScale>
-                    <Button size="lg" className="gap-2">
+                    <Button size="lg" className="gap-2 text-primary-foreground">
                       開始操作教學 <ArrowRight className="w-4 h-4" />
                     </Button>
                   </HoverScale>
@@ -56,6 +58,7 @@ export default function WhatIsPlanner() {
         {/* Main Content */}
         <div className="container py-20">
           <div className="max-w-4xl mx-auto">
+            
             {/* Core Concept */}
             <section className="mb-20">
               <MotionContainer direction="up">
@@ -74,7 +77,8 @@ export default function WhatIsPlanner() {
                       </p>
                     </div>
                   </div>
-                  <div className="bg-slate-50 aspect-video rounded-2xl border border-border flex items-center justify-center text-slate-400">
+                  {/* 🛑 錯誤修正：bg-slate-50 換成 bg-muted，text-slate-400 換成 text-muted-foreground */}
+                  <div className="bg-muted aspect-video rounded-2xl border border-border flex items-center justify-center text-muted-foreground">
                     [ 核心概念示意圖 ]
                   </div>
                 </div>
@@ -90,13 +94,14 @@ export default function WhatIsPlanner() {
                 {coreFeatures.map((feature, idx) => (
                   <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
                     <HoverScale>
-                      <Card className="border-border hover:shadow-lg transition h-full">
+                      {/* 確保卡片背景使用 bg-card */}
+                      <Card className="border-border bg-card hover:shadow-lg transition h-full">
                         <CardHeader>
                           <div className="flex items-center gap-4">
                             <div className="p-2 bg-primary/10 rounded-lg">
                               {feature.icon}
                             </div>
-                            <CardTitle className="text-lg">{feature.title}</CardTitle>
+                            <CardTitle className="text-lg text-card-foreground">{feature.title}</CardTitle>
                           </div>
                         </CardHeader>
                         <CardContent>
@@ -122,7 +127,8 @@ export default function WhatIsPlanner() {
                   { title: '圖表 (Chart)', desc: '進度統計視圖，包括完成百分比與成員負載分析。' }
                 ].map((concept, idx) => (
                   <MotionContainer key={idx} direction="up" delay={idx * 0.05}>
-                    <div className="bg-slate-50 rounded-xl p-6 border border-border hover:border-primary/30 transition-colors">
+                    {/* 🛑 錯誤修正：bg-slate-50 換成 bg-card */}
+                    <div className="bg-card rounded-xl p-6 border border-border hover:border-primary/30 transition-colors shadow-sm">
                       <p className="font-bold text-primary mb-2">{concept.title}</p>
                       <p className="text-muted-foreground text-sm leading-relaxed">{concept.desc}</p>
                     </div>
@@ -133,15 +139,16 @@ export default function WhatIsPlanner() {
 
             {/* Tip Box */}
             <MotionContainer direction="up">
-              <section className="mb-20 bg-blue-50 border-l-4 border-blue-500 p-8 rounded-r-xl">
+              {/* 🛑 閃光彈修正：寫死的 blue-50 和 blue-900 全部換成 primary 語意色 */}
+              <section className="mb-20 bg-primary/10 border-l-4 border-primary p-8 rounded-r-xl">
                 <div className="flex gap-4">
-                  <Lightbulb className="w-8 h-8 text-blue-500 flex-shrink-0" />
+                  <Lightbulb className="w-8 h-8 text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-bold text-lg text-blue-900 mb-2">💡 新手提示</p>
-                    <p className="text-blue-800/80 mb-3">
+                    <p className="font-bold text-lg text-foreground mb-2">💡 新手提示</p>
+                    <p className="text-muted-foreground mb-3">
                       Planner 設計得很直觀，您不需要複雜的培訓就能開始使用。最好的學習方式是：建立一個計畫 → 邀請團隊成員 → 建立幾個任務 → 開始協作。
                     </p>
-                    <p className="text-blue-800/60 text-sm">
+                    <p className="text-muted-foreground/80 text-sm">
                       新版 Planner 已將個人任務管理與團隊任務管理整合在一起。您可以在「My Tasks」中同時看到個人任務與團隊任務。
                     </p>
                   </div>
@@ -152,16 +159,17 @@ export default function WhatIsPlanner() {
             {/* Next Step */}
             <MotionContainer direction="up">
               <div className="text-center py-12 border-t border-border">
-                <h3 className="text-xl font-bold mb-6">了解了概念，來看看具體如何操作！</h3>
+                <h3 className="text-xl font-bold mb-6 text-foreground">了解了概念，來看看具體如何操作！</h3>
                 <Link href="/tutorials/operation-guide">
                   <HoverScale>
-                    <Button size="lg" variant="outline" className="px-10">
+                    <Button size="lg" variant="outline" className="px-10 bg-background text-foreground hover:bg-muted">
                       前往操作指南
                     </Button>
                   </HoverScale>
                 </Link>
               </div>
             </MotionContainer>
+
           </div>
         </div>
         <Footer />
