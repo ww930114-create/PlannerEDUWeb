@@ -25,7 +25,7 @@ function Router() {
         <Route path="/basics/what-is-planner" component={WhatIsPlanner} />
         <Route path="/tutorials/operation-guide" component={OperationGuide} />
         <Route path="/tutorials/task-management" component={TaskManagement} />
-        <Route path="/dashboard" component={ChartOverview} />
+        <Route path="/dashboard/chart-overview" component={ChartOverview} />
 
         <Route path="/support/faq" component={FAQ} />
         <Route path="/support/contact" component={Contact} />

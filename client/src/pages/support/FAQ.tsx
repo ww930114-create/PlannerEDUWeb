@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { ChevronDown, HelpCircle, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
-import Footer from '@/components/Footer';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -164,7 +163,6 @@ export default function FAQ() {
             </MotionContainer>
           </div>
         </div>
-        <Footer />
       </div>
     </PageTransition>
   );

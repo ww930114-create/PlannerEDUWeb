@@ -3,15 +3,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowRight, Lightbulb, Monitor, Layout, Users } from 'lucide-react';
-import Footer from '@/components/Footer';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
+import operationBuildImg from '@/assets/operation.build.png';
+import operationBuildImg2 from '@/assets/operation.build2.png';
+import operationBuildImg3 from '@/assets/operation.build3.png';
 
 export default function OperationGuide() {
   return (
     <PageTransition>
       {/* 🛑 致命錯誤修正：bg-white 換成 bg-background，並加上 text-foreground */}
       <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-        
+
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-12">
           <div className="container">
@@ -27,7 +29,7 @@ export default function OperationGuide() {
         {/* Main Content */}
         <div className="container py-12">
           <div className="max-w-4xl mx-auto">
-            
+
             {/* Comparison Intro */}
             <section className="mb-16">
               <MotionContainer direction="up">
@@ -57,7 +59,7 @@ export default function OperationGuide() {
                       <p className="text-muted-foreground mb-6">
                         直接訪問 <a href="https://tasks.office.com" className="text-primary hover:underline font-semibold" target="_blank" rel="noopener noreferrer">tasks.office.com</a>。這是最快速、最直接的使用方式。
                       </p>
-                      
+
                       <div className="grid md:grid-cols-2 gap-6">
                         <HoverScale>
                           {/* 🛑 加上 bg-card */}
@@ -105,7 +107,7 @@ export default function OperationGuide() {
                       <p className="text-muted-foreground mb-6">
                         在 Teams 左側導覽列搜尋「Planner」並釘選，或在特定頻道的上方點擊「+」新增 Planner 標籤。
                       </p>
-                      
+
                       <div className="grid md:grid-cols-2 gap-6">
                         <HoverScale>
                           <Card className="border-border bg-card h-full">
@@ -166,7 +168,31 @@ export default function OperationGuide() {
                         <p className="text-sm text-muted-foreground">
                           點擊「+ 新計畫」，輸入名稱並選擇隱私等級（私人或公開）。在 Teams 中，您可以直接將計畫與特定頻道關聯。
                         </p>
+                        {/* 🛑 用 grid 切成 3 等份，加上 md: 確保手機版不會擠成一團 */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                          {/* 左邊大圖：佔據 2 個網格 (col-span-2) */}
+                          <div className="md:col-span-2 p-6 bg-muted/10 flex items-center justify-center border border-border rounded-lg overflow-hidden">
+                            <img
+                              src={operationBuildImg}
+                              alt="建立計畫操作示意圖一"
+                              // 加上 max-h-[400px] 和 object-contain 確保圖片不會無限放大，且能保持等高比例
+                              className="w-full h-auto max-h-[400px] object-contain rounded-md shadow-sm border border-border hover:scale-[1.02] transition-transform duration-300"
+                            />
+                          </div>
+
+                          {/* 右邊小圖：佔據 1 個網格 (col-span-1) */}
+                          <div className="md:col-span-1 p-6 bg-muted/10 flex items-center justify-center border border-border rounded-lg overflow-hidden">
+                            <img
+                              src={operationBuildImg2}
+                              alt="建立計畫操作示意圖二"
+                              className="w-full h-auto max-h-[400px] object-contain rounded-md shadow-sm border border-border hover:scale-[1.02] transition-transform duration-300"
+                            />
+                          </div>
+
+                        </div>
                       </div>
+
                     </div>
                   </div>
                 </MotionContainer>
@@ -176,7 +202,7 @@ export default function OperationGuide() {
                   <div>
                     <h3 className="text-xl font-semibold mb-4 text-foreground">2. 設定結構 (分組與標籤)</h3>
                     <p className="text-muted-foreground mb-6">
-                      利用「分組」來定義工作流程（如：待處理、進行中、已完成），利用「標籤」來進行分類（如：行銷、技術、急件）。
+                      利用「分組」來定義工作分類，利用「標籤」來進行分組中工作多重分類。
                     </p>
                     <div className="grid md:grid-cols-2 gap-6">
                       <HoverScale>
@@ -207,6 +233,13 @@ export default function OperationGuide() {
                     <p className="text-muted-foreground mb-6">
                       點擊任何任務卡片，您可以設定到期日、指派人員、新增附件、撰寫檢查清單，並在下方進行評論。
                     </p>
+                    <div className="p-6 bg-muted/10 flex justify-center border border-border rounded-lg overflow-hidden">
+                      <img
+                        src={operationBuildImg3}
+                        alt="建立計畫操作示意圖三"
+                        className="max-w-lg h-auto rounded-md shadow-sm border border-border hover:scale-[1.02] transition-transform duration-300"
+                      />
+                    </div>
                     <div className="bg-primary/10 border-l-4 border-primary p-6 rounded">
                       <p className="text-sm font-semibold mb-2 text-foreground">💡 專家建議</p>
                       <p className="text-sm text-muted-foreground">
@@ -238,7 +271,6 @@ export default function OperationGuide() {
             </MotionContainer>
           </div>
         </div>
-        <Footer />
       </div>
     </PageTransition>
   );

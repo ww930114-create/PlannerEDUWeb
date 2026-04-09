@@ -48,7 +48,7 @@ export default function Navigation() {
           </Link>
 
           {/* 圖表分析 */}
-          <Link href="/dashboard" className="text-foreground hover:text-primary transition font-medium">
+          <Link href="/dashboard/chart-overview" className="text-foreground hover:text-primary transition font-medium">
             圖表分析
           </Link>
 
@@ -118,7 +118,7 @@ export default function Navigation() {
             </Link>
 
             {/* 圖表分析 */}
-            <Link href="/dashboard" className="block font-semibold text-foreground" onClick={() => setIsOpen(false)}>
+            <Link href="/dashboard/chart-overview" className="block font-semibold text-foreground" onClick={() => setIsOpen(false)}>
               圖表分析
             </Link>
 

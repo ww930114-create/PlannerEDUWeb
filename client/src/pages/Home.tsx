@@ -51,7 +51,7 @@ export default function Home() {
                 <Link href="/tutorials/operation-guide">
                   <HoverScale>
                     <Button size="lg" variant="outline" className="w-full sm:w-auto bg-background">
-                      查看操作指南
+                      查看操作教學
                     </Button>
                   </HoverScale>
                 </Link>
@@ -106,7 +106,7 @@ export default function Home() {
                 <div className="space-y-6">
                   {[
                     { step: 1, stage: '第一階段', title: '理解基礎', desc: 'Planner 是什麼、適合誰、與其他工具的差異', link: '/basics/what-is-planner', linkText: '前往入門指南' },
-                    { step: 2, stage: '第二階段', title: '操作實踐', desc: '建立計畫、認識網頁版與 Teams 版介面', link: '/tutorials/operation-guide', linkText: '前往操作指南' },
+                    { step: 2, stage: '第二階段', title: '操作實踐', desc: '建立計畫、認識網頁版與 Teams 版介面', link: '/tutorials/operation-guide', linkText: '前往操作教學' },
                     { step: 3, stage: '第三階段', title: '進階管理', desc: '任務分配、進度追蹤、實務情境應用', link: '/tutorials/task-management', linkText: '前往任務管理' }
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-4">
@@ -228,7 +228,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Footer />
+        
       </div>
     </PageTransition>
   );

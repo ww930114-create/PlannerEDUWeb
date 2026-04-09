@@ -2,7 +2,6 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, CheckCircle, Lightbulb, Users, BarChart3, MessageSquare, Layout, Zap } from 'lucide-react';
-import Footer from '@/components/Footer';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
 
 export default function WhatIsPlanner() {
@@ -172,7 +171,6 @@ export default function WhatIsPlanner() {
 
           </div>
         </div>
-        <Footer />
       </div>
     </PageTransition>
   );

@@ -2,8 +2,8 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Lightbulb, CheckCircle2, Clock, Users, ListTodo, MessageSquare, Paperclip } from 'lucide-react';
-import Footer from '@/components/Footer';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
+import operationBuildImg3 from '@/assets/operation.build3.png';
 
 export default function TaskManagement() {
   const taskDetailItems = [
@@ -19,7 +19,7 @@ export default function TaskManagement() {
     <PageTransition>
       {/* 🛑 致命錯誤修正：bg-white 換成 bg-background，並加上 text-foreground */}
       <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-        
+
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-12">
           <div className="container">
@@ -35,7 +35,7 @@ export default function TaskManagement() {
         {/* Main Content */}
         <div className="container py-12">
           <div className="max-w-4xl mx-auto">
-            
+
             {/* Create Task Section */}
             <section className="mb-20">
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -56,16 +56,13 @@ export default function TaskManagement() {
                   </div>
                 </MotionContainer>
                 <MotionContainer direction="right">
-                  {/* 🛑 修正：bg-slate-50 換成 bg-muted，border-slate-300 換成 border-border，text-slate-400 換成 text-muted-foreground */}
-                  <div className="aspect-square bg-muted rounded-2xl border border-dashed border-border flex items-center justify-center text-muted-foreground p-8 text-center">
-                    <div>
-                      {/* 🛑 修正：bg-white 換成 bg-background */}
-                      <div className="w-16 h-16 bg-background rounded-full shadow-sm mx-auto mb-4 flex items-center justify-center border border-border">
-                        <ListTodo className="w-8 h-8 text-primary" />
-                      </div>
-                      <p className="font-bold text-foreground">任務卡片示意圖</p>
-                      <p className="text-xs mt-2">顯示進度、期限與負責人</p>
-                    </div>
+                  {/* 🛑 外層保留正方形框框， bg-muted 讓多出來的空間看起來有質感 */}
+                  <div className="aspect-square bg-muted rounded-2xl border border-border overflow-hidden flex items-center justify-center shadow-sm p-4">
+                    <img
+                      src={operationBuildImg3}
+                      alt="任務卡片真實截圖"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </MotionContainer>
               </div>
@@ -163,14 +160,14 @@ export default function TaskManagement() {
             <MotionContainer direction="up">
               {/* 🛑 修正：bg-slate-50 換成 bg-muted/50 */}
               <section className="bg-muted/50 border border-border p-12 rounded-3xl text-center">
-                <h3 className="text-2xl font-bold mb-4 text-foreground">掌握了管理技巧，來看看實際應用案例！</h3>
+                <h3 className="text-2xl font-bold mb-4 text-foreground">掌握了管理技巧，來看看圖表分析！</h3>
                 <p className="text-muted-foreground mb-8">
-                  了解不同行業與團隊是如何利用 Planner 來優化工作流程的。
+                  了解管理者是如何利用 Planner 來優化工作流程的。
                 </p>
-                <Link href="/scenarios/use-cases">
+                <Link href="/dashboard/chart-overview">
                   <HoverScale>
                     <Button size="lg" className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-                      查看應用情境 <ArrowRight className="w-4 h-4" />
+                      查看圖表分析 <ArrowRight className="w-4 h-4" />
                     </Button>
                   </HoverScale>
                 </Link>
@@ -178,7 +175,6 @@ export default function TaskManagement() {
             </MotionContainer>
           </div>
         </div>
-        <Footer />
       </div>
     </PageTransition>
   );

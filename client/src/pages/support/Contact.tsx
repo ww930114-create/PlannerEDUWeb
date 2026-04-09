@@ -2,7 +2,6 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, MessageSquare, HelpCircle, ArrowRight, Globe } from 'lucide-react';
-import Footer from '@/components/Footer';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
 
 export default function Contact() {
@@ -169,7 +168,6 @@ export default function Contact() {
             </MotionContainer>
           </div>
         </div>
-        <Footer />
       </div>
     </PageTransition>
   );

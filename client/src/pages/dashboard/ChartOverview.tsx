@@ -1,6 +1,7 @@
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
+// CardHeader / CardContent 已全數替換為原生 div 以避免 shadcn 預設 padding 衝突
 import {
   PieChart,
   BarChart2,
@@ -12,8 +13,10 @@ import {
   LayoutGrid,
   CalendarCheck,
 } from 'lucide-react';
-import Footer from '@/components/Footer';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
+import ChartOverview1 from '@/assets/ChartOverview.png';
+import ChartOverview2 from '@/assets/ChartOverview2.png';
+import ChartOverview3 from '@/assets/ChartOverview3.png';
 
 // ── 型別定義 ────────────────────────────────────────────────────────────────
 interface ChartCardData {
@@ -35,7 +38,6 @@ interface ScenarioData {
 const ImagePlaceholder: React.FC<{ label?: string }> = ({
   label = '此處請替換為 Planner 圖表實際截圖',
 }) => (
-  // 🛑 修正：bg-slate-100 -> bg-muted, border-slate-300 -> border-border
   <div className="w-full h-44 bg-muted border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 text-muted-foreground select-none">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -69,12 +71,12 @@ const CHART_DATA: ChartCardData[] = [
   },
   {
     icon: <LayoutGrid className="w-6 h-6 text-purple-500" />,
-    title: '貯列 (Bucket)',
+    title: '貯體 (Bucket)',
     subtitle: '各分類工作負載比較',
     description:
-      '依照您在 Planner 中建立的貯列（如前端、後端、行銷）來比較各組的任務數量，可清楚看出哪個部門或工作類別承擔了最多任務量。',
+      '依照您在 Planner 中建立的貯體（如前端、後端、行銷）來比較各組的任務數量，可清楚看出哪個部門或工作類別承擔了最多任務量。',
     insights: [
-      '某貯列任務數遠多於其他組，代表該組可能是瓶頸',
+      '某貯體任務數遠多於其他組，代表該組可能是瓶頸',
       '搭配「成員」圖表交叉比對，找出高風險區域',
       '可用於資源重分配決策，平衡各組工作量',
     ],
@@ -121,10 +123,10 @@ const SCENARIOS: ScenarioData[] = [
     icon: <Users className="w-6 h-6 text-purple-500" />,
     title: '週會資源調配決策',
     content:
-      '每週一用「成員」圖表搭配「貯列」圖表做交叉分析，找出高負載區域並在週會上做任務轉移決策。',
+      '每週一用「成員」圖表搭配「貯體」圖表做交叉分析，找出高負載區域並在週會上做任務轉移決策。',
     steps: [
       '比對「成員」圖表，找出任務數明顯高於平均的成員',
-      '對照「貯列」圖表，確認瓶頸來自哪個工作分類',
+      '對照「貯體」圖表，確認瓶頸來自哪個工作分類',
       '在週會上提出具體的任務轉移建議，避免主觀偏頗',
     ],
   },
@@ -141,11 +143,21 @@ const SCENARIOS: ScenarioData[] = [
   },
 ];
 
+// ── 統一卡片陰影樣式（四周均勻，X/Y 偏移皆為 0）────────────────────────────
+const CARD_SHADOW = {
+  style: { boxShadow: '0 0 20px rgba(0, 0, 0, 0.08)' } as React.CSSProperties,
+  className: 'border-border bg-card overflow-hidden transition-[box-shadow] duration-300 hover:[box-shadow:0_0_30px_rgba(0,0,0,0.14)]',
+};
+
+// ── 圖示容器陰影（四周均勻小光暈）──────────────────────────────────────────
+const ICON_SHADOW = {
+  style: { boxShadow: '0 0 10px rgba(0, 0, 0, 0.08)' } as React.CSSProperties,
+};
+
 // ── 主元件 ───────────────────────────────────────────────────────────────────
 export default function ChartOverview() {
   return (
     <PageTransition>
-      {/* 🛑 致命錯誤修正：bg-white 換成 bg-background，加上 text-foreground */}
       <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
 
         {/* ── Header ──────────────────────────────────────────────────────── */}
@@ -176,36 +188,32 @@ export default function ChartOverview() {
                 <p className="text-muted-foreground mb-8">
                   圖表功能內建於 Planner 看板中，所有 Microsoft 365 用戶均可使用，無需任何外掛。
                 </p>
-
+ 
                 <HoverScale>
-                  <Card className="border-border bg-card hover:shadow-xl transition-shadow overflow-hidden">
-                    <CardHeader className="bg-muted/50 border-b border-border pb-6">
-                      <div className="flex items-center gap-4">
-                        <div className="p-3 bg-background rounded-xl shadow-sm">
+                  <Card className={CARD_SHADOW.className} style={CARD_SHADOW.style}>
+                    <div className="p-6">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="p-3 bg-background rounded-xl" style={ICON_SHADOW.style}>
                           <MousePointerClick className="w-6 h-6 text-blue-500" />
                         </div>
-                        <CardTitle className="text-xl text-card-foreground">點擊「圖表 (Charts)」頁籤</CardTitle>
+                        <h3 className="text-xl font-semibold text-card-foreground">
+                          點擊「圖表」頁籤
+                        </h3>
                       </div>
-                    </CardHeader>
-                    <CardContent className="pt-6">
                       <div className="grid md:grid-cols-2 gap-8">
-                        {/* 步驟說明 */}
                         <div className="space-y-4">
                           {[
                             {
                               step: '開啟 Microsoft Planner',
-                              detail:
-                                '從 Microsoft 365 應用程式列或 Teams 的「Planner」分頁進入目標專案。',
+                              detail: '從 Microsoft 365 應用程式列或 Teams 的「Planner」分頁進入目標專案。',
                             },
                             {
                               step: '找到頁籤列',
-                              detail:
-                                '在看板上方，你會看到「看板 (Board)」、「圖表 (Charts)」、「時程表 (Schedule)」等頁籤。',
+                              detail: '在看板上方，你會看到「方格」、「面板」、「排程」、「圖表」等頁籤。',
                             },
                             {
-                              step: '點擊「圖表 (Charts)」',
-                              detail:
-                                '頁面將自動載入四種圖表視圖，從「狀態」開始由上往下排列。',
+                              step: '點擊「圖表」',
+                              detail: '頁面將自動載入四種圖表視圖，從「狀態」開始由上往下排列。',
                             },
                           ].map((item, idx) => (
                             <div key={idx} className="flex items-start gap-3 text-sm">
@@ -218,7 +226,7 @@ export default function ChartOverview() {
                               </div>
                             </div>
                           ))}
-
+ 
                           <div className="flex items-start gap-2 bg-primary/5 border-l-4 border-primary p-3.5 rounded-r-xl text-sm text-muted-foreground mt-2">
                             <Lightbulb className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                             <span>
@@ -227,16 +235,19 @@ export default function ChartOverview() {
                             </span>
                           </div>
                         </div>
-
-                        {/* 截圖佔位符 */}
+ 
                         <div className="flex flex-col gap-2">
-                          <ImagePlaceholder label="此處請替換為 Planner 頁籤列實際截圖（標示「圖表」頁籤位置）" />
+                          <img
+                            src={ChartOverview3}
+                            alt="狀態、貯體和優先順序圖表示意"
+                            className="w-full h-full object-contain"
+                          />
                           <p className="text-xs text-muted-foreground text-center">
                             ↑ Planner 頁籤列，請標示「圖表」頁籤位置
                           </p>
                         </div>
                       </div>
-                    </CardContent>
+                    </div>
                   </Card>
                 </HoverScale>
               </section>
@@ -253,48 +264,76 @@ export default function ChartOverview() {
                 </p>
               </MotionContainer>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                {CHART_DATA.map((chart, idx) => (
-                  <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
-                    <HoverScale>
-                      <Card className="border-border bg-card h-full hover:shadow-xl transition-shadow overflow-hidden">
-                        <CardHeader className="bg-muted/50 border-b border-border pb-6">
-                          <div className="flex items-center gap-4">
-                            <div className="p-3 bg-background rounded-xl shadow-sm">
+              <MotionContainer direction="up" delay={0.1}>
+                <Card className={CARD_SHADOW.className} style={CARD_SHADOW.style}>
+                  <div className="p-8 flex flex-col gap-10">
+
+                    {/* ── 四個圖表說明列表 ── */}
+                    <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+                      {CHART_DATA.map((chart, idx) => (
+                        <div key={idx} className="flex flex-col gap-3">
+                          {/* 圖示 + 標題 */}
+                          <div className="flex items-center gap-3">
+                            <div className="p-2.5 bg-background rounded-xl shrink-0" style={ICON_SHADOW.style}>
                               {chart.icon}
                             </div>
                             <div>
-                              <CardTitle className="text-xl text-card-foreground">{chart.title}</CardTitle>
-                              <p className="text-sm text-muted-foreground mt-0.5">{chart.subtitle}</p>
+                              <h3 className="text-base font-semibold text-card-foreground">{chart.title}</h3>
+                              <p className="text-xs text-muted-foreground mt-0.5">{chart.subtitle}</p>
                             </div>
                           </div>
-                        </CardHeader>
-                        <CardContent className="pt-6 flex flex-col gap-5">
-                          <p className="text-muted-foreground text-sm leading-relaxed">
+
+                          {/* 說明 */}
+                          <p className="text-sm text-muted-foreground leading-relaxed">
                             {chart.description}
                           </p>
 
-                          <ImagePlaceholder label={`此處請替換為「${chart.title}」圖表截圖`} />
-
-                          <div>
-                            <p className="text-xs font-bold uppercase tracking-wider text-primary mb-3">
-                              重點洞察：
-                            </p>
-                            <div className="space-y-2">
-                              {chart.insights.map((insight, iIdx) => (
-                                <div key={iIdx} className="flex items-start gap-3 text-sm text-muted-foreground">
-                                  <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                                  <span>{insight}</span>
-                                </div>
-                              ))}
-                            </div>
+                          {/* 洞察要點 */}
+                          <div className="space-y-1.5">
+                            {chart.insights.map((insight, iIdx) => (
+                              <div key={iIdx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+                                <span>{insight}</span>
+                              </div>
+                            ))}
                           </div>
-                        </CardContent>
-                      </Card>
-                    </HoverScale>
-                  </MotionContainer>
-                ))}
-              </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* ── 分隔線 ── */}
+                    <div className="border-t border-border" />
+
+                    {/* ── 兩張說明截圖 ── */}
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="flex flex-col gap-2">
+                        <div className="h-64 rounded-xl overflow-hidden bg-black">
+                          <img
+                            src={ChartOverview1}
+                            alt="狀態、貯體和優先順序圖表示意"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground text-center">
+                          ↑ 狀態、貯體和優先順序圖表示意
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <div className="h-64 rounded-xl overflow-hidden bg-black">
+                          <img
+                            src={ChartOverview2}
+                            alt="成員圖表示意"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground text-center">
+                          ↑ 成員圖表示意
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </MotionContainer>
             </section>
 
             {/* ── Step 3：實戰應用情境 ──────────────────────────────────── */}
@@ -312,16 +351,14 @@ export default function ChartOverview() {
                 {SCENARIOS.map((scenario, idx) => (
                   <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
                     <HoverScale>
-                      <Card className="border-border bg-card h-full hover:shadow-xl transition-shadow overflow-hidden">
-                        <CardHeader className="bg-muted/50 border-b border-border pb-6">
-                          <div className="flex items-center gap-4">
-                            <div className="p-3 bg-background rounded-xl shadow-sm">
+                      <Card className={`${CARD_SHADOW.className} h-full`} style={CARD_SHADOW.style}>
+                        <div className="p-6">
+                          <div className="flex items-center gap-4 mb-6">
+                            <div className="p-3 bg-background rounded-xl" style={ICON_SHADOW.style}>
                               {scenario.icon}
                             </div>
-                            <CardTitle className="text-xl text-card-foreground">{scenario.title}</CardTitle>
+                            <h3 className="text-xl font-semibold text-card-foreground">{scenario.title}</h3>
                           </div>
-                        </CardHeader>
-                        <CardContent className="pt-6">
                           <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
                             {scenario.content}
                           </p>
@@ -336,7 +373,7 @@ export default function ChartOverview() {
                               </div>
                             ))}
                           </div>
-                        </CardContent>
+                        </div>
                       </Card>
                     </HoverScale>
                   </MotionContainer>
@@ -357,7 +394,7 @@ export default function ChartOverview() {
                         '每週定期檢視成員圖表，避免過勞累積',
                         '使用優先順序圖表作為向上溝通的數據依據',
                         '月底匯出圖表截圖，納入專案回顧文件',
-                        '貯列命名保持一致，確保圖表比較有意義',
+                        '貯體命名保持一致，確保圖表比較有意義',
                         '搭配任務截止日期設定，讓延遲數字更準確',
                       ].map((tip, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -373,7 +410,6 @@ export default function ChartOverview() {
 
             {/* ── Next Steps CTA ────────────────────────────────────────── */}
             <MotionContainer direction="up">
-              {/* 🛑 修正：bg-slate-900 換成 bg-primary，字體色適應 primary-foreground */}
               <section className="bg-primary text-primary-foreground p-12 rounded-3xl text-center">
                 <BarChart2 className="w-12 h-12 text-primary-foreground mx-auto mb-6" />
                 <h3 className="text-2xl font-bold mb-4">準備好用數據驅動你的團隊了嗎？</h3>
@@ -402,8 +438,6 @@ export default function ChartOverview() {
 
           </div>
         </div>
-
-        <Footer />
       </div>
     </PageTransition>
   );

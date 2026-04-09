@@ -1,70 +1,69 @@
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Lightbulb, CheckCircle2, Megaphone, Settings, Briefcase, Target, Users } from 'lucide-react';
-import Footer from '@/components/Footer';
+import { Card } from '@/components/ui/card';
+import { Lightbulb, CheckCircle2, Users, Factory, ShieldCheck, Cpu, Truck } from 'lucide-react';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
 
 export default function UseCases() {
   const scenarios = [
     {
-      icon: <Megaphone className="w-6 h-6 text-orange-500" />,
-      title: '行銷團隊的行銷活動管理',
-      description: '行銷團隊需要協調多個行銷活動，涉及不同的部門和外部合作夥伴。',
+      icon: <ShieldCheck className="w-6 h-6 text-blue-500" />,
+      title: '品保部門的客訴與 CAPA 追蹤',
+      description: '客戶回報連接器端子接觸不良，品保需跨台灣與東莞廠協調根因分析，並在規定時效內回覆 8D 報告。',
       tasks: [
-        '建立一個「2026 年 Q1 行銷計畫」',
-        '為不同的活動建立分組（如「社群媒體」、「電子郵件」）',
-        '為每個活動建立任務，並分配給相應的團隊成員',
-        '在 Teams 頻道中新增 Planner，讓所有相關人員都能看到進度'
+        '建立「客訴案件 #2026-Q2-047」計畫，標註客戶名稱與料號',
+        '分組為「初步回覆」、「根因分析」、「改善措施」、「效果確認」',
+        '將 8D 各節點任務分派給台灣品保、東莞製程及業務窗口',
+        '設定截止日期並在 Teams 頻道同步通知相關人員',
       ],
     },
     {
-      icon: <Settings className="w-6 h-6 text-blue-500" />,
-      title: '軟體開發團隊的 Sprint 管理',
-      description: '開發團隊需要管理 Sprint 中的任務，並追蹤 Bug 和功能請求。',
+      icon: <Cpu className="w-6 h-6 text-purple-500" />,
+      title: '研發部門的新產品開發里程碑',
+      description: '光電連接器新料號從設計到量產，需要研發、模具、製程、品保多部門在固定節點交付成果。',
       tasks: [
-        '為每個 Sprint 建立一個計畫（如「Sprint 1」）',
-        '使用分組表示任務狀態（如「待辦」、「進行中」、「已完成」）',
-        '為每個任務新增詳細描述和相關檔案',
-        '定期在 Teams 中進行 Sprint 評估和回顧'
+        '建立「光電連接器 LCP-2026 NPI 專案」計畫',
+        '依開發階段分組：概念設計、樣品試作、客戶驗證、量產移轉',
+        '每個里程碑建立子任務並附上規格文件與圖面連結',
+        '定期於 Teams 開設計審查會議，會議記錄直接存入任務評論',
       ],
     },
     {
-      icon: <Briefcase className="w-6 h-6 text-green-500" />,
-      title: '人力資源團隊的招聘流程',
-      description: '人力資源團隊需要管理複雜的招聘流程，涉及多個階段和多個利益相關者。',
+      icon: <Factory className="w-6 h-6 text-orange-500" />,
+      title: '生產部門的跨廠產能協調',
+      description: '接獲三星大單，需在淡水、東莞、蘇州三廠之間協調模具移轉與產能分配，避免交期延誤。',
       tasks: [
-        '為每個職位建立一個計畫',
-        '使用分組表示招聘階段（如「篩選簡歷」、「初試」、「複試」）',
-        '為每個候選人建立任務並存放簡歷',
-        '使用評論進行面試官之間的討論'
+        '建立「三星 Q3 備料計畫」，分組對應各廠區負責區段',
+        '為模具移轉、首件確認、量產備料各建立追蹤任務',
+        '指派廠區負責人並設定每週進度回報提醒',
+        '在 Teams 頻道固定週五同步各廠最新進度與風險',
       ],
     },
     {
-      icon: <Target className="w-6 h-6 text-purple-500" />,
-      title: '個人目標與學習計畫',
-      description: '利用 Planner 的「我的任務」功能，將個人學習目標與團隊任務整合。',
+      icon: <Truck className="w-6 h-6 text-green-500" />,
+      title: '業務團隊的報價與交期管理',
+      description: '業務同時手持多個客戶詢價，需協調研發估成本、採購確認料況、PM 給交期，整合後才能回覆。',
       tasks: [
-        '建立「年度自我提升」計畫',
-        '將大型目標拆解為檢查清單',
-        '設定截止日期提醒自己',
-        '定期檢查 My Tasks 中的「指派給我的」任務'
+        '建立「客戶詢價追蹤板」，每筆詢價建立獨立任務',
+        '分組為「待評估」、「報價中」、「等客戶回覆」、「已結案」',
+        '任務卡內附上詢價規格、成本估算與客戶期望交期',
+        '使用優先順序標記緊急客戶，確保高價值詢價優先處理',
       ],
-    }
+    },
   ];
 
   return (
     <PageTransition>
-      {/* 🛑 替換最外層背景與文字預設色 */}
       <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-        
+
         {/* Header */}
         <div className="bg-primary/5 border-b border-border py-16">
           <div className="container">
             <MotionContainer direction="up">
               <h1 className="text-4xl font-bold text-foreground mb-4">常見使用情境</h1>
               <p className="text-lg text-muted-foreground">
-                探索 Planner 在不同行業和部門中的實際應用，尋找最適合您的協作模式。
+                以下情境取材自瀚荃日常運營，涵蓋品保、研發、生產與業務，
+                協助各部門快速找到最適合自己的 Planner 協作模式。
               </p>
             </MotionContainer>
           </div>
@@ -77,22 +76,34 @@ export default function UseCases() {
               {scenarios.map((scenario, idx) => (
                 <MotionContainer key={idx} direction="up" delay={idx * 0.1}>
                   <HoverScale>
-                    {/* 🛑 卡片背景使用 bg-card */}
-                    <Card className="border-border bg-card h-full hover:shadow-xl transition-shadow overflow-hidden">
-                      <CardHeader className="bg-muted/50 border-b border-border pb-6">
+                    <Card
+                      className="border-border bg-card h-full overflow-hidden transition-[box-shadow] duration-300 hover:[box-shadow:0_0_30px_rgba(0,0,0,0.14)]"
+                      style={{ boxShadow: '0 0 20px rgba(0,0,0,0.08)' }}
+                    >
+                      <div className="p-6 flex flex-col gap-5 h-full">
+                        {/* 圖示 + 標題 */}
                         <div className="flex items-center gap-4">
-                          <div className="p-3 bg-background rounded-xl shadow-sm">
+                          <div
+                            className="p-3 bg-background rounded-xl shrink-0"
+                            style={{ boxShadow: '0 0 10px rgba(0,0,0,0.08)' }}
+                          >
                             {scenario.icon}
                           </div>
-                          <CardTitle className="text-xl text-card-foreground">{scenario.title}</CardTitle>
+                          <h3 className="text-xl font-semibold text-card-foreground leading-snug">
+                            {scenario.title}
+                          </h3>
                         </div>
-                      </CardHeader>
-                      <CardContent className="pt-6">
-                        <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+
+                        {/* 描述 */}
+                        <p className="text-muted-foreground text-sm leading-relaxed">
                           {scenario.description}
                         </p>
+
+                        {/* 步驟 */}
                         <div className="space-y-3">
-                          <p className="text-xs font-bold uppercase tracking-wider text-primary">建議操作步驟：</p>
+                          <p className="text-xs font-bold uppercase tracking-wider text-primary">
+                            建議操作步驟：
+                          </p>
                           {scenario.tasks.map((task, taskIdx) => (
                             <div key={taskIdx} className="flex items-start gap-3 text-sm text-muted-foreground">
                               <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
@@ -100,7 +111,7 @@ export default function UseCases() {
                             </div>
                           ))}
                         </div>
-                      </CardContent>
+                      </div>
                     </Card>
                   </HoverScale>
                 </MotionContainer>
@@ -113,15 +124,15 @@ export default function UseCases() {
                 <div className="flex gap-4">
                   <Lightbulb className="w-8 h-8 text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-bold text-lg text-foreground mb-4">通用最佳實踐</p>
+                    <p className="font-bold text-lg text-foreground mb-4">瀚荃適用的最佳實踐</p>
                     <div className="grid sm:grid-cols-2 gap-4">
                       {[
-                        '為不同的工作流程建立不同的計畫',
-                        '定期檢查 My Day 和 My Tasks',
-                        '使用標籤和優先順序進行分類',
-                        '在 Teams 中與團隊進行實時協作',
-                        '定期歸檔已完成的計畫',
-                        '利用評論保留決策脈絡'
+                        '跨廠任務請務必標註負責廠區（淡水／東莞／蘇州）',
+                        '客訴與 CAPA 任務需設定截止日期，避免逾期回覆客戶',
+                        '新產品開發里程碑建議逐一建立任務，方便追蹤節點達成',
+                        '業務詢價板定期歸檔已結案任務，維持看板整潔',
+                        '重要決策與會議紀錄寫入任務評論，保留完整脈絡',
+                        '在 Teams 頻道加入 Planner，讓跨廠同仁即時掌握進度',
                       ].map((tip, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
                           <div className="w-1 h-1 bg-primary rounded-full shrink-0"></div>
@@ -136,17 +147,16 @@ export default function UseCases() {
 
             {/* Next Steps */}
             <MotionContainer direction="up">
-              {/* 🛑 替換黑漆漆的 bg-slate-900，改用企業主色調 bg-primary 與對應的文字色 */}
               <section className="bg-primary text-primary-foreground p-12 rounded-3xl text-center">
                 <Users className="w-12 h-12 text-primary-foreground mx-auto mb-6" />
                 <h3 className="text-2xl font-bold mb-4">準備好提升團隊效率了嗎？</h3>
                 <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-                  現在您已經看到了 Planner 的實際應用，是時候開始建立您的第一個計畫了。
+                  找到符合你部門的情境了嗎？立即前往操作指南，
+                  建立瀚荃第一個 Planner 專案計畫。
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link href="/tutorials/operation-guide">
                     <HoverScale>
-                      {/* 按鈕反白處理，讓它在深藍色背景上跳出來 */}
                       <Button size="lg" className="px-10 bg-background text-primary hover:bg-muted">
                         前往操作指南
                       </Button>
@@ -164,7 +174,6 @@ export default function UseCases() {
             </MotionContainer>
           </div>
         </div>
-        <Footer />
       </div>
     </PageTransition>
   );
