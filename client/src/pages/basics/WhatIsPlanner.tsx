@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, CheckCircle, Lightbulb, Users, BarChart3, MessageSquare, Layout, Zap } from 'lucide-react';
 import { MotionContainer, PageTransition, HoverScale } from '@/components/MotionContainer';
+import whatisplanner from '@/assets/WhatIsPlanner.png';
 
 export default function WhatIsPlanner() {
   const coreFeatures = [
@@ -78,7 +79,12 @@ export default function WhatIsPlanner() {
                   </div>
                   {/* 🛑 錯誤修正：bg-slate-50 換成 bg-muted，text-slate-400 換成 text-muted-foreground */}
                   <div className="bg-muted aspect-video rounded-2xl border border-border flex items-center justify-center text-muted-foreground">
-                    [ 核心概念示意圖 ]
+                    <img
+                              src={whatisplanner}
+                              alt="核心概念示意圖"
+                              // 加上 max-h-[400px] 和 object-contain 確保圖片不會無限放大，且能保持等高比例
+                              className="w-full h-auto max-h-[400px] object-contain rounded-md shadow-sm border border-border hover:scale-[1.02] transition-transform duration-300"
+                            />
                   </div>
                 </div>
               </MotionContainer>
